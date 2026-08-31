@@ -1,5 +1,6 @@
 const title = document.getElementById('title');
 const view = document.getElementById('view');
+const sidebarToggle = document.getElementById('sidebar-toggle');
 
 // ------------------------------------------------------------------------------------------
 // [0]
@@ -12,6 +13,7 @@ document.getElementById('sidebar').addEventListener('click', async (e) => {
   if (!filePath) return;
 
   title.textContent = e.target.textContent;
+  sidebarToggle.checked = false;
 
   try {
     // ------------------------------------------------------------------------------------------
@@ -45,6 +47,7 @@ document.getElementById('sidebar').addEventListener('click', async (e) => {
     const pre = document.createElement('pre');
     const code = document.createElement('code');
 
+    pre.className = 'overflow-x-auto mb-0 rounded-box p-3 text-sm md:p-4 md:text-base';
     code.className = 'language-javascript';
     code.textContent = source;
 
