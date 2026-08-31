@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Study</title>
+
+  <!-- daisyUI -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css">
+
+  <!-- Tailwind CSS v4 -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- highlight.js : 코드 색상 표시 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+</head>
+
+<body>
+
+  <!-- 전체 레이아웃 -->
+  <div class="drawer lg:drawer-open">
+    <input id="sidebar-toggle" type="checkbox" class="drawer-toggle">
+
+    <!-- 본문 -->
+    <div class="drawer-content">
+      <main class="p-8">
+        <h2 id="title" class="text-3xl font-bold mb-6">JavaScript Study</h2>
+
+        <!-- JS 파일 원본 코드 표시 -->
+        <div id="view" class="card bg-base-100 shadow-sm">
+          <div class="card-body">
+            사이드바에서 메뉴를 선택하세요.
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- 사이드바 -->
+    <div class="drawer-side">
+      <label for="sidebar-toggle" class="drawer-overlay"></label>
+
+      <aside id="sidebar" class="bg-base-200 min-h-full w-64">
+        <div class="p-5">
+          <h1 class="text-xl font-bold">JS STUDY</h1>
+        </div>
+
+        <ul class="menu w-full">
+          <!-- ECMAScript -->
+          <li class="menu-title">ECMAScript</li>
+          <li><button data-file="ecmascript/01_ecmascript-overview.js">01. ECMAScript Overview</button></li>
+          <li><button data-file="ecmascript/02_js-runtime-map.js">02. JS Runtime Map</button></li>
+
+          <!-- Web APIs -->
+          <li class="menu-title mt-4">Web APIs</li>
+          <li><button data-file="webapis/01_web-platform-basics.js">01. web-platform-basics</button></li>
+
+        </ul>
+      </aside>
+    </div>
+  </div>
+
+  <!-- 동적 JS 로딩 -->
+  <script type="module" src="./main.js"></script>
+
+</body>
+</html>
