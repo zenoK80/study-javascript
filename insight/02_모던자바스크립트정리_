@@ -1,0 +1,327 @@
+# Modern JavaScript (ES5 ~ ES2021+) 핵심 문법 요약
+
+1. ES5 - strict mode (엄격 모드)
+실수를 방지하기 위해 자바스크립트를 더 엄격하게 검사합니다. 선언하지 않은 변수 사용 등을 막아줍니다.
+
+```javascript
+"use strict";
+x = 10; // 에러 발생: ReferenceError: x is not defined
+```
+
+---
+
+2. ES5 - Object.defineProperty
+객체의 프로퍼티를 수정 불가능하게 만들거나, 읽기 전용으로 설정하는 등 세밀하게 제어합니다.
+
+```javascript
+const user = {};
+Object.defineProperty(user, 'name', {
+  value: '철수',
+  writable: false // 값을 변경할 수 없도록 설정
+});
+
+user.name = '영희'; // 무시됨 (엄격 모드에서는 에러)
+console.log(user.name); // '철수'
+```
+
+---
+
+3. ES6 - let, const
+var의 단점인 중복 선언 가능, 블록 스코프 무시 문제를 해결한 변수 선언 키워드입니다.
+
+```javascript
+let title = "자바스크립트";
+title = "ECMAScript"; // 변수 재할당 가능
+
+const pi = 3.14;
+// pi = 3.15; // 에러 발생: 상수이므로 재할당 불가능
+```
+
+---
+
+4. ES6 - Arrow Function (화살표 함수)
+코드를 간결하게 줄여주며, 자신만의 this를 가지지 않고 주변(렉시컬) this를 그대로 따릅니다.
+
+```javascript
+// 기존 함수
+const add = function(a, b) { return a + b; };
+
+// 화살표 함수
+const addArrow = (a, b) => a + b;
+
+console.log(addArrow(3, 5)); // 8
+```
+
+---
+
+5. ES6 - class
+기존의 복잡한 프로토타입 기반 객체 지향을 다른 언어처럼 직관적으로 쓸 수 있게 만든 문법입니다.
+
+```javascript
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+  sayHello() {
+    return `안녕하세요, ${this.name}입니다.`;
+  }
+}
+
+const me = new Person('홍길동');
+console.log(me.sayHello()); // "안녕하세요, 홍길동입니다."
+```
+
+---
+
+6. ES6 - Promise
+비동기 작업(서버 데이터 호출 등)의 성공과 실패를 체계적으로 관리하는 객체입니다.
+
+```javascript
+const fetchData = new Promise((resolve, reject) => {
+  let success = true;
+  if (success) resolve("데이터 로드 완료");
+  else reject("에러 발생");
+});
+
+fetchData
+  .then(result => console.log(result)) // "데이터 로드 완료"
+  .catch(error => console.error(error));
+```
+
+---
+
+7. ES6 - import / export
+코드를 파일 단위로 모듈화하여 분리하고 불러와서 조립할 수 있게 합니다.
+
+```javascript
+// math.js (내보내기)
+export const add = (a, b) => a + b;
+
+// main.js (가져오기)
+import { add } from './math.js';
+console.log(add(2, 3)); // 5
+```
+
+---
+
+8. ES6 - Symbol
+절대 중복되지 않는 유일무이한 식별자(원시 값)를 만듭니다. 객체의 비밀 키 등으로 유용합니다.
+
+```javascript
+const id1 = Symbol('id');
+const id2 = Symbol('id');
+
+console.log(id1 === id2); // false (설명이 같아도 다른 값)
+```
+
+---
+
+9. ES6 - iterator (이터레이터)
+배열처럼 for...of나 스프레드 연산자를 사용할 수 있도록 순회 표준 규격을 만족하는 객체입니다.
+
+```javascript
+const arr =;
+const iterator = arr[Symbol.iterator]();
+
+console.log(iterator.next()); // { value: 10, done: false }
+console.log(iterator.next()); // { value: 20, done: false }
+console.log(iterator.next()); // { value: undefined, done: true }
+```
+
+---
+
+10. ES6 - ** (지수 연산자)
+Math.pow() 대신 직관적으로 제곱/거듭제곱을 구하는 연산자입니다.
+
+```javascript
+console.log(2 ** 3); // 2의 3제곱 = 8
+console.log(5 ** 2); // 5의 2제곱 = 25
+```
+
+---
+
+11. ES6 - Array.prototype.includes
+배열 내부에 특정 값이 포함되어 있는지 확인하여 true/false로 반환합니다.
+
+```javascript
+const fruits = ['apple', 'banana', 'orange'];
+
+console.log(fruits.includes('banana')); // true
+console.log(fruits.includes('grape'));  // false
+```
+
+---
+
+12. ES2017 - async / await
+Promise의 .then() 체이닝을 생략하고, 비동기 코드를 마치 동기식 코드처럼 위에서 아래로 가독성 있게 작성합니다.
+
+```javascript
+// 가상의 프로미스 함수가 있다고 가정할 때
+async function getResult() {
+  const result = await fetchData;
+  console.log(result);
+}
+```
+
+---
+
+13. ES2017 - Object.entries
+객체의 [key, value] 쌍들을 묶어 2차원 배열 형태로 바꾸어줍니다. 반복문을 돌리기 수월해집니다.
+
+```javascript
+const user = { name: '철수', age: 20 };
+const entries = Object.entries(user);
+
+console.log(entries); // [ ['name', '철수'], ['age', 20] ]
+```
+
+---
+
+14. ES2018 - 객체 스프레드 (...)
+기존 객체의 속성들을 그대로 펼쳐서 복사하거나 새로운 속성을 추가할 때 씁니다.
+
+```javascript
+const base = { original: true };
+const copy = { ...base, newKey: 'yes' };
+
+console.log(copy); // { original: true, newKey: 'yes' }
+```
+
+---
+
+15. ES2018 - Promise.prototype.finally
+프로미스 비동기 처리가 성공(then)하든 실패(catch)하든 마지막에 무조건 한 번 실행되는 블록입니다.
+
+```javascript
+fetchData
+  .then(res => console.log(res))
+  .catch(err => console.error(err))
+  .finally(() => console.log("로딩 완료")); // 언제나 실행
+```
+
+---
+
+16. ES2018 - Array.prototype.flat
+다차원 중첩 배열을 지정한 깊이만큼 평평한 1차원 배열로 펼쳐줍니다.
+
+```javascript
+const nested = [1, [2, [3]]];
+
+console.log(nested.flat(1)); // [1, 2, [3]]
+console.log(nested.flat(2)); // [1, 2, 3] (완전히 펼침)
+```
+
+---
+
+17. ES2020 - 옵셔널 체이닝 (?.)
+참조하려는 대상이 null이거나 undefined여도 에러를 발생시키지 않고 안전하게 undefined를 반환합니다.
+
+```javascript
+const user = { name: '영희' }; // info 속성이 없음
+
+// 기존: user.info.address -> 에러 발생으로 스크립트 중단
+console.log(user.info?.address); // 에러 없이 undefined 반환
+```
+
+---
+
+18. ES2020 - 널 병합 연산자 (??)
+값이 null 또는 undefined일 때만 우항의 기본값을 대입합니다. 기존 || 연산자와 달리 0이나 빈 문자열 ""을 유효한 값으로 인정합니다.
+
+```javascript
+const score = 0;
+
+const result1 = score || 100; // 0을 falsy로 보아 100 대입
+const result2 = score ?? 100; // 0은 null/undefined가 아니므로 0 대입
+
+console.log(result1); // 100
+console.log(result2); // 0
+```
+
+---
+
+19. ES2020 - BigInt
+숫자(Number) 타입의 안전 한계치를 넘어가는 거대한 정수를 오차 없이 표현합니다. 숫자 뒤에 n을 붙입니다.
+
+```javascript
+const huge = 9007199254740991n;
+console.log(huge + 1n); // 9007199254740992n (정확히 계산됨)
+```
+
+---
+
+20. ES2020 - globalThis
+브라우저(window), Node.js(global) 등 실행 환경에 따라 달랐던 전역 객체 접근법을 하나로 통일했습니다.
+
+```javascript
+console.log(globalThis); // 어떤 환경에서든 최상위 전역 객체 출력
+```
+
+---
+
+21. ES2021~ - 논리 할당 연산자 (&&=, ||=, ??=)
+논리 연산과 할당을 숏컷으로 합친 문법입니다. 값이 비었을 때 변수에 값을 할당하기 좋습니다.
+
+```javascript
+let title = "";
+title ||= "기본 제목"; // title이 falsy("")이므로 대입
+console.log(title); // "기본 제목"
+
+let count = null;
+count ??= 10; // count가 null이므로 대입
+console.log(count); // 10
+```
+
+---
+
+22. ES2021~ - Array.prototype.at()
+대괄호 [index]의 발전형으로, 음수 인덱스를 넣어 뒤에서부터 요소를 역순으로 편하게 가져옵니다.
+
+```javascript
+const letters = ['A', 'B', 'C', 'D'];
+
+console.log(letters.at(-1)); // 'D' (맨 뒤 요소)
+console.log(letters.at(-2)); // 'C' (뒤에서 두 번째)
+```
+
+---
+
+23. ES2021~ - 클래스 private 필드 (#)
+클래스 내부 변수 이름 앞에 #을 붙이면 외부 접근이 원천 차단되는 진정한 캡슐화를 지원합니다.
+
+```javascript
+class BankAccount {
+  #balance = 10000; // 외부에서 접근 불가
+
+  getBalance() {
+    return this.#balance; // 내부에서는 접근 가능
+  }
+}
+
+const account = new BankAccount();
+// console.log(account.#balance); // 에러 발생 (SyntaxError)
+console.log(account.getBalance()); // 10000
+```
+
+---
+
+24. ES2021~ - Object.groupBy
+배열의 데이터를 콜백 함수의 기준에 따라 객체 형태로 깔끔하게 묶어 그룹화합니다.
+
+```javascript
+const items = [
+  { name: '사과', type: '과일' },
+  { name: '당근', type: '채소' },
+  { name: '배', type: '과일' }
+];
+
+const result = Object.groupBy(items, item => item.type);
+console.log(result);
+/*
+결과:
+{
+  과일: [ { name: '사과', ... }, { name: '배', ... } ],
+  채소: [ { name: '당근', ... } ]
+}
+*/
+```
