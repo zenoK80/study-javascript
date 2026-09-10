@@ -106,11 +106,22 @@ export function render() {
 
 	// 클릭도 매크로태스크다. 핸들러 안의 Promise는
 	// 그 핸들러가 끝난 직후 곧바로 소진된다.
-	document.getElementById("버튼").addEventListener("click", () => {
-	console.log("A. 클릭 핸들러 시작 — 새 매크로태스크");
-	Promise.resolve().then(() => console.log("C. 핸들러가 만든 마이크로태스크"));
-	console.log("B. 클릭 핸들러 끝");
+	//
+	// 주의:
+	// document.getElementById("버튼")은 HTML 안에 id="버튼"인 요소가 있을 때만 동작한다.
+	// 지금 index.html에는 그런 버튼이 없으므로 null이 나오고,
+	// null.addEventListener(...)를 하려고 해서 에러가 났다.
+	//
+	// 그래서 여기서는 실제 DOM 버튼 대신 EventTarget으로 연습용 이벤트 대상을 만든다.
+	const 클릭대상 = new EventTarget();
+
+	클릭대상.addEventListener("click", () => {
+		console.log("A. 클릭 핸들러 시작 — 새 매크로태스크");
+		Promise.resolve().then(() => console.log("C. 핸들러가 만든 마이크로태스크"));
+		console.log("B. 클릭 핸들러 끝");
 	});
+
+	클릭대상.dispatchEvent(new Event("click"));
 
 	// 렌더링은 마이크로태스크를 전부 비운 다음에 온다
 	requestAnimationFrame(() => {console.log("6. rAF — 다음 화면 갱신 직전");});

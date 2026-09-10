@@ -150,7 +150,7 @@ export function render() {
 	// 내가 만든 채점기의 정답(내가만든ToBoolean(값))을 일일이 비교해 보는 과정
 	검사대상.forEach(function(값){
 		// 1. 진짜 자바스크립트가 채점한 결과
-		const 표준 결과 = Boolean(값);
+		const 표준결과 = Boolean(값);
 		// 2. 내가 만든 수동 채점기가 채점한 결과
 		const 내결과 = 내가만든ToBoolean(값);
 		// 화면에 이쁘게 출력하기 위해 글자는 따옴표 붙여주는 코드

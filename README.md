@@ -1,5 +1,5 @@
 ## Project Structure
-https://zenok80.github.io/study-javascript/
+https://zenok80.github.io/study-zeno-javascript/
 
 ```text
 📁 study-javascript/
