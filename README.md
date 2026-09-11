@@ -21,7 +21,7 @@ https://zenok80.github.io/study-zeno-javascript/
 ## Progress
 ### Ecmascript
 * `2026.09.10` **01_**: CMAScript 표준과 JavaScript 실행 환경
-
+* `2026.09.11` **02_**: 02. JavaScript 런타임 지도: 엔진, 호스트, 이벤트 루프 맛보기
 
 JavaScript 런타임의 기본 구조와 코드 실행 순서
 ### Web APIS
